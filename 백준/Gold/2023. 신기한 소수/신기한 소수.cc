@@ -24,10 +24,7 @@ void DFS(int current_num, int len) {
         return;
     }
     for (int i = 1; i < 10; i++) {
-        if (i % 2 == 0) { // 짝수면 탐색할 필요 없음
-            continue;
-        }
-        if (isPrime(current_num * 10 + i)) { // 소수면 재귀로 자리수 늘리기
+        if (i % 2 == 1 && isPrime(current_num * 10 + i)) { // 소수면 재귀로 자리수 늘리기
             DFS(current_num * 10 + i, len + 1);
         }
     }
