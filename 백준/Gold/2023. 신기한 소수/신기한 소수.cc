@@ -20,9 +20,7 @@ int main()
 
 void DFS(int current_num, int len) {
     if (len == n) {
-        if (isPrime(current_num)) {
-            cout << current_num << "\n";
-        }
+        cout << current_num << "\n";
         return;
     }
     for (int i = 1; i < 10; i++) {
