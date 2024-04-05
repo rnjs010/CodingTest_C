@@ -2,10 +2,10 @@
 #include <vector>
 using namespace std;
 
-static vector < vector <int> > A;
+void DFS(int v, int depth);
+static vector<vector<int>> arr;
 static vector<bool> visited;
 static bool arrive;
-void DFS(int now, int depth);
 
 int main()
 {
@@ -13,41 +13,41 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int N, M;
+    int n, m;
+    cin >> n >> m;
+    arr.resize(n);
+    visited = vector<bool>(n, false);
     arrive = false;
-    cin >> N >> M;
-    A.resize(N);
-    visited = vector<bool>(N, false);
 
-
-    for (int i = 0; i < M; i++) {
+    for (int i = 0; i < m; i++) {
         int s, e;
         cin >> s >> e;
-        A[s].push_back(e);
-        A[e].push_back(s);
+        arr[s].push_back(e);
+        arr[e].push_back(s);
     }
 
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < n; i++) {
         DFS(i, 1);
-        if (arrive)
+        if (arrive) {
             break;
+        }
     }
 
-    if(arrive) cout << 1 << "\n";
-    else  cout << 0 << "\n";
-    
+    cout << (arrive ? 1 : 0) << "\n";
+    return 0;
 }
 
-void DFS(int now, int depth) {
-    if (depth == 5 || arrive) { // 깊이가 5가되면 프로그램 종료
+void DFS(int v, int depth) {
+    if (depth == 5) {
         arrive = true;
         return;
     }
-    visited[now] = true;
-    for (int i : A[now]) {
+
+    visited[v] = true;
+    for (int i : arr[v]) {
         if (!visited[i]) {
             DFS(i, depth + 1);
         }
     }
-    visited[now] = false;
+    visited[v] = false;
 }
